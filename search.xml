@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>测试博客</title>
+    <url>/2023/11/08/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>1</p>
+<p>这是一篇测试博客</p>
+]]></content>
+  </entry>
+  <entry>
     <title>leetcode刷题记录-数组</title>
     <url>/2023/11/13/leetcode-%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="数组理论基础"><a href="#数组理论基础" class="headerlink" title="数组理论基础"></a>数组理论基础</h1><p><strong>数组是存放在连续内存空间上的相同类型数据的集合</strong></p>
@@ -11,7 +18,7 @@
 </ul>
 <p><strong>因为数组的在内存空间的地址是连续的，所以我们在删除或者增添元素的时候，就难免要移动其他元素的地址。</strong></p>
 <p><strong>数组的元素是不能删的，只能覆盖。</strong></p>
-<h2 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704.二分查找"></a>704.二分查找</h2><p><img src="C:\Users\95186\AppData\Roaming\Typora\typora-user-images\image-20231115215351857.png" alt="image-20231115215351857"></p>
+<h2 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704.二分查找"></a>704.二分查找</h2><p><img src="D:\MyBlog\images\image-20231115215351857.png" alt="image-20231115215351857"></p>
 <p><strong>重点：</strong>要分清区间，在循环中始终坚持根据查找区间的定义来做边界处理</p>
 <p>分俩种情况</p>
 <p>1.左闭右闭区间[left,right]</p>
@@ -20,13 +27,6 @@
 <p>2.左闭右开区间[left,right)</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> right = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123; <span class="comment">// 因为left == right的时候，在[left, right)是无效的空间，所以使用 &lt;</span></span><br><span class="line">            <span class="type">int</span> middle = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (nums[middle] &gt; target) &#123;</span><br><span class="line">                right = middle; </span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[middle] &lt; target) &#123;</span><br><span class="line">                left = middle + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-]]></content>
-  </entry>
-  <entry>
-    <title>测试博客</title>
-    <url>/2023/11/08/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>1</p>
-<p>这是一篇测试博客</p>
 ]]></content>
   </entry>
   <entry>
