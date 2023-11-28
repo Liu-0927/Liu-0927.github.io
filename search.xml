@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>测试博客</title>
-    <url>/2023/11/08/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>1</p>
-<p>这是一篇测试博客</p>
-]]></content>
+    <title>清风的第一篇博客</title>
+    <url>/2023/11/08/%E6%B8%85%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>leetcode刷题记录-数组</title>
@@ -38,18 +40,30 @@
 <p><strong>双指针法（快慢指针法）在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> val)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> left=<span class="number">0</span>,right=nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">while</span>(left&lt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[left]==val)</span><br><span class="line">            &#123;</span><br><span class="line">                nums[left]=nums[right<span class="number">-1</span>];</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<h2 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977.有序数组的平方"></a>977.有序数组的平方</h2><p><img src="https://cdn.jsdelivr.net/gh/Liu-0927/images/image-20231128173318107.png" alt="image-20231128173318107"></p>
+<p>法一(暴力法)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">sortedSquares</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> n=nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nums[i]=nums[i]*nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>法二(双指针)</p>
+<p>数组其实是有序的， 只不过负数平方之后可能成为最大数了。</p>
+<p>那么数组平方的最大值就在数组的两端，不是最左边就是最右边，不可能是中间。</p>
+<p>此时可以考虑双指针法了，p指向起始位置，q指向终止位置。</p>
+<p>定义一个新数组nusm2，和nums数组一样的大小，让k指向result数组终止位置。</p>
+<p>如果<code>nums[p] * nums[p] &lt;= nums[q] * nums[q]</code> 那么<code>nums2[k--] = nums[q] * nums[q];</code> 。</p>
+<p>如果<code>nums[i] * nums[p] &gt; nums[q] * nusms[q]</code> 那么<code>nums2[k--] = nums[p] * nums[p];</code> 。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">sortedSquares</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p=<span class="number">0</span>,q=nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> k=nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt;<span class="built_in">nums2</span>(nums.<span class="built_in">size</span>(),<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span>(p&lt;=q)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[p]*nums[p]&lt;=nums[q]*nums[q])</span><br><span class="line">            &#123;</span><br><span class="line">                nums2[k--]=nums[q]*nums[q];</span><br><span class="line">                q--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                nums2[k--]=nums[p]*nums[p];</span><br><span class="line">                p++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209.长度最小的子数组"></a>209.长度最小的子数组</h2><p><img src="https://cdn.jsdelivr.net/gh/Liu-0927/images/image-20231128174231331.png" alt="image-20231128174231331"></p>
 ]]></content>
       <tags>
         <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
-    <title>清风的第一篇博客</title>
-    <url>/2023/11/08/%E6%B8%85%E9%A3%8E%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>工具</tag>
-        <tag>hexo</tag>
-      </tags>
+    <title>测试博客</title>
+    <url>/2023/11/08/%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>1</p>
+<p>这是一篇测试博客</p>
+]]></content>
   </entry>
 </search>
